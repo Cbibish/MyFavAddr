@@ -4,6 +4,7 @@ import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { isAuthorized } from "../utils/isAuthorized";
 import { getUserFromRequest } from "../utils/getUserFromRequest";
+import { validateEmail } from "../utils/validateEmail";
 
 const tokenSecretKey = process.env.SESSION_SECRET || "superlongstring";
 
@@ -16,7 +17,17 @@ usersRouter.post("/", async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: `email and password are required` });
   }
-
+  
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: "invalid email format" });
+  }
+  
+  const existing = await User.findOneBy({ email });
+  
+  if (existing) {
+    return res.status(409).json({ message: "email already taken" });
+  }
+  
   try {
     const user = new User();
     user.email = email;
