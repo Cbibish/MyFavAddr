@@ -3,6 +3,11 @@ import app from "./app";
 import datasource from "./datasource";
 import { faker } from "@faker-js/faker";
 
+jest.mock("./utils/getCoordinatesFromSearch", () => ({
+  getCoordinatesFromSearch: jest.fn().mockResolvedValue({ lat: 48.8584, lng: 2.2945 }),
+}));
+
+
 beforeAll(async () => {
   await datasource.initialize();
 });
