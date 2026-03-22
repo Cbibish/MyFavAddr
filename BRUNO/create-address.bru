@@ -1,0 +1,36 @@
+meta {
+  name: Create address
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/addresses
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "name": "Eiffel Tower",
+    "searchWord": "Eiffel Tower Paris"
+  }
+}
+
+tests {
+  test("returns 200", function() {
+    expect(res.getStatus()).to.equal(200);
+    const addressId = res.getBody().item.id;
+    bru.setVar("addressId", addressId);
+  });
+  test("returns address item", function() {
+    expect(res.getBody()).to.have.property("item");
+  });
+  test("item has correct name", function() {
+    expect(res.getBody().item.name).to.equal("Eiffel Tower");
+  });
+}

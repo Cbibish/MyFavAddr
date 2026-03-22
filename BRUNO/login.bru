@@ -1,0 +1,31 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/users/tokens
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test@test.com",
+    "password": "supersecret"
+  }
+}
+
+tests {
+  test("returns 200", function() {
+    expect(res.getStatus()).to.equal(200);
+    const token = res.getBody().token;
+    bru.setEnvVar("token", token);
+  });
+  test("returns token", function() {
+    expect(res.getBody()).to.have.property("token");
+  });
+    
+  
+}

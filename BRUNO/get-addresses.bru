@@ -1,0 +1,25 @@
+meta {
+  name: Get addresses
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/addresses
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+tests {
+  test("returns 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("returns items array", function() {
+    expect(res.getBody()).to.have.property("items");
+    expect(res.getBody().items).to.be.an("array");
+  });
+}

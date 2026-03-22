@@ -1,0 +1,24 @@
+meta {
+  name: Get profile
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/users/me
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3000
+}
+
+tests {
+  test("returns 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("returns user item", function() {
+    expect(res.getBody()).to.have.property("item");
+  });
+}
