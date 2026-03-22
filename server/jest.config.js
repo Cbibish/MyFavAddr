@@ -10,4 +10,5 @@ module.exports = {
     transform: {
         ...tsJestPreset.transform,
     },
+    testMatch: ['**/tests/**/*.test.ts'],
 };
