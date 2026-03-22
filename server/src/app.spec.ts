@@ -282,3 +282,10 @@ describe("Address visibility", () => {
     expect(found).toBeUndefined();
   });
 });
+
+describe("404 handler", () => {
+  test("returns 404 for unknown routes", async () => {
+    const res = await request(app).get("/api/unknown-route");
+    expect(res.status).toBe(404);
+  });
+});
