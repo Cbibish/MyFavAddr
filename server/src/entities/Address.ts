@@ -19,11 +19,17 @@ export class Address extends BaseEntity {
   @Column({ nullable: true })
   description: string;
 
-  @Column("float")
+  @Column({ type: "float", nullable: true })
   lng: number;
 
-  @Column("float")
+  @Column({ type: "float", nullable: true })
   lat: number;
+
+  @Column({ nullable: true })
+  rating: number;
+
+  @Column({ default: false })
+  isPublic: boolean;
 
   @ManyToOne(() => User, (user) => user.addresses)
   user: User;
