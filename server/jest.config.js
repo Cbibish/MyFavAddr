@@ -9,7 +9,9 @@ module.exports = {
     ...tsJestPreset.transform,
   },
   testMatch: ['**/tests/**/*.test.ts', '**/*.spec.ts'],
-  transformIgnorePatterns: [
-    'node_modules/(?!@faker-js/faker)',
-  ],
+  testPathIgnorePatterns: ['/node_modules/', '/client/e2e/'],
+  transformIgnorePatterns: ['node_modules/(?!@faker-js/faker)'],
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.ts'],
+  coverageDirectory: 'coverage',
 };
