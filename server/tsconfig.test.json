@@ -4,6 +4,7 @@
     "rootDir": ".",
     "module": "commonjs",
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "types": ["jest", "node"]
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "test/**/*.ts"]

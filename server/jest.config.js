@@ -1,14 +1,15 @@
 const { createDefaultPreset } = require('ts-jest');
-
 const tsJestPreset = createDefaultPreset({
-    tsconfig: 'tsconfig.test.json',
+  tsconfig: 'tsconfig.test.json',
 });
 
-/** @type {import('jest').Config} */
 module.exports = {
-    testEnvironment: 'node',
-    transform: {
-        ...tsJestPreset.transform,
-    },
-    testMatch: ['**/tests/**/*.test.ts'],
+  testEnvironment: 'node',
+  transform: {
+    ...tsJestPreset.transform,
+  },
+  testMatch: ['**/tests/**/*.test.ts', '**/*.spec.ts'],
+  transformIgnorePatterns: [
+    'node_modules/(?!@faker-js/faker)',
+  ],
 };
